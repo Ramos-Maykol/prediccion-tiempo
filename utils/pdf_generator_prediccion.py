@@ -1,5 +1,5 @@
 # utils/pdf_generator_prediccion.py
-from fpdf import FPDF, XPos # Importar XPos para centrar imágenes
+from fpdf import FPDF
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 import os # Necesario para Path.cwd()

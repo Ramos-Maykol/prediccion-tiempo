@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from fpdf import FPDF
+from fpdf2 import FPDF, XPos # CAMBIO: Importar FPDF y XPos desde fpdf2
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
@@ -176,7 +176,7 @@ class PDFReportGenerator:
         self.pdf.set_font(FONT_NAME, "B", 16)
         self.pdf.cell(0, 10, self._tr("titulo"), ln=1, align="C")
         self.pdf.set_font(FONT_NAME, "", 12)
-        self.pdf.multi_cell(0, 8, self._tr("intro"))
+        self.pdf.multi_cell(0, 8, self._tr("intro")) # Eliminado ln=1
         self.pdf.ln(5)
 
     def _add_machine_specs(self):
@@ -185,11 +185,11 @@ class PDFReportGenerator:
         self.pdf.set_font(FONT_NAME, "", 11)
         for key, value in self.machine_specs.items():
             if isinstance(value, list):
-                self.pdf.multi_cell(0, 7, f"{key}:", ln=1)
+                self.pdf.multi_cell(0, 7, f"{key}:") # Eliminado ln=1
                 for item in value:
-                    self.pdf.multi_cell(0, 6, f"  - {item}", ln=1)
+                    self.pdf.multi_cell(0, 6, f"  - {item}") # Eliminado ln=1
             else:
-                self.pdf.multi_cell(0, 7, f"{key}: {value}", ln=1)
+                self.pdf.multi_cell(0, 7, f"{key}: {value}") # Eliminado ln=1
         self.pdf.ln(5)
 
     def _add_eda_visuals(self):
@@ -214,7 +214,7 @@ class PDFReportGenerator:
         self.pdf.set_font(FONT_NAME, "B", 13)
         self.pdf.cell(0, 10, self._tr("preprocesamiento"), ln=1)
         self.pdf.set_font(FONT_NAME, "", 11)
-        self.pdf.multi_cell(0, 8, self._tr("descripcion_preprocesamiento"))
+        self.pdf.multi_cell(0, 8, self._tr("descripcion_preprocesamiento")) # Eliminado ln=1
         self.pdf.ln(5)
 
     def _add_metrics_table(self):
@@ -308,7 +308,7 @@ class PDFReportGenerator:
         self.pdf.cell(0, 10, self._tr("conclusion"), ln=1)
         self.pdf.set_font(FONT_NAME, "", 11)
         conclusion_text = self._tr("texto_conclusion").format(modelo=self.best_model)
-        self.pdf.multi_cell(0, 8, conclusion_text)
+        self.pdf.multi_cell(0, 8, conclusion_text) # Eliminado ln=1
 
     def generate(self, output_filename: str = "reporte_comparativo_modelos.pdf") -> Path:
         """
