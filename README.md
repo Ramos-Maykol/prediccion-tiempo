@@ -152,15 +152,15 @@ Universidad Nacional de Trujillo (UNT) - Tesis 2025
 ## 📂 Estructura de Archivos
 
 ```
-proyecto/
+Prediccion-tiempo/
 ├── datos/
-│   ├── modelos/
-│   │   ├── ann_model.h5
-│   │   ├── random_forest_model.pkl
-│   │   └── xgboost_model.pkl
 │   ├── scaler.pkl
 │   ├── X_test.npy
 │   └── y_test.npy
+├── modelos/
+│   ├── ann_model.h5
+│   ├── random_forest_model.pkl
+│   └── xgboost_model.pkl
 ├── img
 ├── reporte
 ├── app.py
