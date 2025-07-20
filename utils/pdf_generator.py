@@ -176,20 +176,24 @@ class PDFReportGenerator:
         self.pdf.set_font(FONT_NAME, "B", 16)
         self.pdf.cell(0, 10, self._tr("titulo"), ln=1, align="C")
         self.pdf.set_font(FONT_NAME, "", 12)
-        self.pdf.multi_cell(0, 8, self._tr("intro")) # Eliminado ln=1
+        # Calcular ancho utilizable
+        usable_width = self.pdf.w - self.pdf.l_margin - self.pdf.r_margin
+        self.pdf.multi_cell(usable_width, 8, self._tr("intro"))
         self.pdf.ln(5)
 
     def _add_machine_specs(self):
         self.pdf.set_font(FONT_NAME, "B", 13)
         self.pdf.cell(0, 10, self._tr("detalles_maquina"), ln=1)
         self.pdf.set_font(FONT_NAME, "", 11)
+        # Calcular ancho utilizable
+        usable_width = self.pdf.w - self.pdf.l_margin - self.pdf.r_margin
         for key, value in self.machine_specs.items():
             if isinstance(value, list):
-                self.pdf.multi_cell(0, 7, f"{key}:") # Eliminado ln=1
+                self.pdf.multi_cell(usable_width, 7, f"{key}:")
                 for item in value:
-                    self.pdf.multi_cell(0, 6, f"  - {item}") # Eliminado ln=1
+                    self.pdf.multi_cell(usable_width, 6, f"  - {item}")
             else:
-                self.pdf.multi_cell(0, 7, f"{key}: {value}") # Eliminado ln=1
+                self.pdf.multi_cell(usable_width, 7, f"{key}: {value}")
         self.pdf.ln(5)
 
     def _add_eda_visuals(self):
@@ -214,7 +218,9 @@ class PDFReportGenerator:
         self.pdf.set_font(FONT_NAME, "B", 13)
         self.pdf.cell(0, 10, self._tr("preprocesamiento"), ln=1)
         self.pdf.set_font(FONT_NAME, "", 11)
-        self.pdf.multi_cell(0, 8, self._tr("descripcion_preprocesamiento")) # Eliminado ln=1
+        # Calcular ancho utilizable
+        usable_width = self.pdf.w - self.pdf.l_margin - self.pdf.r_margin
+        self.pdf.multi_cell(usable_width, 8, self._tr("descripcion_preprocesamiento"))
         self.pdf.ln(5)
 
     def _add_metrics_table(self):
@@ -308,7 +314,9 @@ class PDFReportGenerator:
         self.pdf.cell(0, 10, self._tr("conclusion"), ln=1)
         self.pdf.set_font(FONT_NAME, "", 11)
         conclusion_text = self._tr("texto_conclusion").format(modelo=self.best_model)
-        self.pdf.multi_cell(0, 8, conclusion_text) # Eliminado ln=1
+        # Calcular ancho utilizable
+        usable_width = self.pdf.w - self.pdf.l_margin - self.pdf.r_margin
+        self.pdf.multi_cell(usable_width, 8, conclusion_text)
 
     def generate(self, output_filename: str = "reporte_comparativo_modelos.pdf") -> Path:
         """
