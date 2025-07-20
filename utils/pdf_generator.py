@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from fpdf import FPDF, XPos # Importar XPos explícitamente
+from fpdf2 import FPDF, XPos # CAMBIO: Importar FPDF y XPos desde fpdf2
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
